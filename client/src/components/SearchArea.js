@@ -19,6 +19,7 @@ export default function SearchArea() {
   ];
 
   const [allTickets, setAllTickets] = useState([]);
+  const [counterHiddenTickets, setCounterHiddenTickets] = useState();
 
   useEffect(() => {
     axios
@@ -29,16 +30,16 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
-  const getBySearch = (e) => {
+  const getTicketBySearch = (e) => {
     const inputValue = e.target.value;
-    axios.get(`/api/tickets?searchText=${inputValue}`).then((res) => {
-      console.log(res.data);
-      if (res.data) {
+    axios
+      .get(`/api/tickets?searchText=${inputValue}`)
+      .then((res) => {
         setAllTickets(res.data);
-      } else {
-        setAllTickets("Not Found");
-      }
-    });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
@@ -47,8 +48,9 @@ export default function SearchArea() {
         className="search-input"
         id="searchInput"
         placeholder="Search your tickets"
-        onChange={getBySearch}
+        onChange={getTicketBySearch}
       ></input>
+      <div id="hideTicketsCounter">{counterHiddenTickets}</div>
       <div className="labels-menu">
         {labels.map((label, i) => (
           <span className="label-menu" key={`label-${i}`}>
@@ -56,7 +58,11 @@ export default function SearchArea() {
           </span>
         ))}
       </div>
-      <TicketsList allTickets={allTickets} />
+      <TicketsList
+        allTickets={allTickets}
+        setCounterHiddenTickets={setCounterHiddenTickets}
+        counterHiddenTickets={counterHiddenTickets}
+      />
     </div>
   );
 }
