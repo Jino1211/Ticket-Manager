@@ -18,6 +18,17 @@ export default function SearchArea() {
     " View Count",
   ];
 
+  const [allTickets, setAllTickets] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("/api/tickets")
+      .then((data) => {
+        setAllTickets(data.data);
+      })
+      .catch((e) => console.log(e));
+  }, []);
+
   return (
     <div className="main">
       <input className="search-field" placeholder="Search your tickets"></input>
@@ -28,7 +39,7 @@ export default function SearchArea() {
           </span>
         ))}
       </div>
-      <TicketsList />
+      <TicketsList allTickets={allTickets} />
     </div>
   );
 }
