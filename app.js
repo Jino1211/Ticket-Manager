@@ -6,6 +6,7 @@ const Tickets = require("./models/tickets");
 app.use(express.static("client/build"));
 app.use(express.json());
 
+//GET all ticket. and also filter the data if receive query.
 app.get("/api/tickets", async (req, res) => {
   try {
     const { searchText } = req.query;
@@ -22,6 +23,7 @@ app.get("/api/tickets", async (req, res) => {
   }
 });
 
+//PATCH, update the ticket to done.
 app.patch("/api/tickets/:ticketsId/done", (req, res) => {
   const { ticketsId } = req.params;
 
@@ -38,6 +40,7 @@ app.patch("/api/tickets/:ticketsId/done", (req, res) => {
     });
 });
 
+//PATCH, update the ticket to undone.
 app.patch("/api/tickets/:ticketsId/undone", (req, res) => {
   const { ticketsId } = req.params;
 

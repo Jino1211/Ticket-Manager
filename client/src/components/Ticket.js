@@ -1,6 +1,5 @@
 import React from "react";
 import Label from "./Label";
-import { useState } from "react";
 import "../styles/Ticket.css";
 
 export default function Ticket({
@@ -8,16 +7,15 @@ export default function Ticket({
   setCounterHiddenTickets,
   counterHiddenTickets,
 }) {
-  const [hideTicket, setHideTicket] = useState("ticket");
-
+  //Responsible to hide the ticket when click on the "hide" button
   const hide = (e) => {
-    setHideTicket("ticket-hidden");
+    ticket.hide = true;
     setCounterHiddenTickets(
       counterHiddenTickets ? counterHiddenTickets + 1 : 1
     );
   };
   return (
-    <div className={hideTicket}>
+    <div className={ticket.hide ? "ticket-hidden" : "ticket"}>
       <div className="title">title: {ticket.title}</div>
       <div className="content">content: {ticket.content}</div>
       <div className="labels-div">

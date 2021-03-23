@@ -21,15 +21,18 @@ export default function SearchArea() {
   const [allTickets, setAllTickets] = useState([]);
   const [counterHiddenTickets, setCounterHiddenTickets] = useState();
 
+  //GET all ticket when the page is loading first
   useEffect(() => {
     axios
       .get("/api/tickets")
-      .then((data) => {
-        setAllTickets(data.data);
+      .then((tickets) => {
+        tickets.data.forEach((ticket) => (ticket.hidden = false));
+        setAllTickets(tickets.data);
       })
       .catch((e) => console.log(e));
   }, []);
 
+  //Get the all ticket that match to the input search
   const getTicketBySearch = (e) => {
     const inputValue = e.target.value;
     axios
@@ -42,8 +45,20 @@ export default function SearchArea() {
       });
   };
 
+  //Restore all the hidden ticket
+  const restoreAll = () => {
+    allTickets.forEach((ticket) => (ticket.hide = false));
+    setCounterHiddenTickets();
+    setAllTickets(allTickets);
+  };
+
   return (
     <div className="main">
+      {counterHiddenTickets && (
+        <button id="restoreHideTickets" onClick={restoreAll}>
+          restoreAll
+        </button>
+      )}
       <input
         className="search-input"
         id="searchInput"
@@ -62,6 +77,7 @@ export default function SearchArea() {
         allTickets={allTickets}
         setCounterHiddenTickets={setCounterHiddenTickets}
         counterHiddenTickets={counterHiddenTickets}
+        setAllTickets={setAllTickets}
       />
     </div>
   );
