@@ -5,12 +5,8 @@ export default function TicketsList({ allTickets }) {
   return (
     <>
       <div className="ticket-list">
-        {allTickets.map((ticket, i) => (
-          <Ticket
-            key={`ticket-${i}`}
-            ticket={ticket}
-            date={ticket.creationTime}
-          />
+        {allTickets?.map((ticket, i) => (
+          <Ticket key={`ticket-${i}`} ticket={ticket} />
         ))}
       </div>
     </>

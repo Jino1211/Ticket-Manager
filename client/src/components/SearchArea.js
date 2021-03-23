@@ -15,7 +15,7 @@ export default function SearchArea() {
     "Problem",
     "Login",
     "Tutorial",
-    " View Count",
+    "View Count",
   ];
 
   const [allTickets, setAllTickets] = useState([]);
@@ -29,9 +29,26 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
+  const getBySearch = (e) => {
+    const inputValue = e.target.value;
+    axios.get(`/api/tickets?searchText=${inputValue}`).then((res) => {
+      console.log(res.data);
+      if (res.data) {
+        setAllTickets(res.data);
+      } else {
+        setAllTickets("Not Found");
+      }
+    });
+  };
+
   return (
     <div className="main">
-      <input className="search-field" placeholder="Search your tickets"></input>
+      <input
+        className="search-input"
+        id="searchInput"
+        placeholder="Search your tickets"
+        onChange={getBySearch}
+      ></input>
       <div className="labels-menu">
         {labels.map((label, i) => (
           <span className="label-menu" key={`label-${i}`}>
