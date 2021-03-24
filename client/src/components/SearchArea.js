@@ -1,4 +1,5 @@
 import React from "react";
+import "../styles/searchArea.css";
 import TicketsList from "./TicketsList";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -23,6 +24,8 @@ export default function SearchArea() {
   const [originalTickets, setOriginalTickets] = useState([]);
   const [filterLabel, setFilterLabel] = useState([]);
   const [hideTickets, setHideTickets] = useState([]);
+  const [index, setIndex] = useState();
+  const [pageIndex, setPageIndex] = useState();
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -36,10 +39,42 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
+  const limitView = (e) => {
+    if (!e.target.value) return setAllTickets(originalTickets);
+    const viewNumber = e.target.value;
+    const limitTickets = [];
+    if (index >= originalTickets.length) return;
+    for (let i = viewNumber; i < viewNumber * 2; i++) {
+      limitTickets.push(originalTickets[i]);
+    }
+
+    setIndex(viewNumber);
+    setPageIndex(viewNumber * 2);
+    setAllTickets(limitTickets);
+  };
+
+  const nextPage = () => {
+    console.log(pageIndex);
+    console.log(index);
+    let bool = false;
+    const limitTickets = [];
+    for (let i = pageIndex; i <= Number(pageIndex) + Number(index); i++) {
+      if (i >= originalTickets.length) {
+        setAllTickets(limitTickets);
+        bool = true;
+        console.log("sad");
+        break;
+      }
+      limitTickets.push(originalTickets[i]);
+      console.log(i);
+    }
+    bool ? setPageIndex(0) : setPageIndex(Number(pageIndex) + Number(index));
+    setAllTickets(limitTickets);
+  };
+
   //Get the all ticket that match to the input search. set persistent, ticket that is hidden doesn't display when you search
   const getTicketBySearch = async (e) => {
     const inputValue = e.target.value;
-    console.log(inputValue);
     try {
       const res = await axios.get(`/api/tickets?searchText=${inputValue}`);
       let tempTicket = [];
@@ -100,6 +135,15 @@ export default function SearchArea() {
           <span> Hidden tasks</span>
         </div>
       )}
+      <label>Number of ticket</label>
+      <select onChange={limitView} className="limited-tickets">
+        <option>{false}</option>
+        <option value={20}>20</option>
+        <option value={30}>30</option>
+        <option value={40}>40</option>
+        <option value={50}>50</option>
+      </select>
+      <button onClick={nextPage}>next</button>
       <div className="labels-menu">
         {labels.map((label, i) => (
           <span

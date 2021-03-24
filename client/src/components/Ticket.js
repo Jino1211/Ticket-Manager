@@ -22,6 +22,9 @@ export default function Ticket({
   return (
     <div className={ticket.hide ? "ticket-hidden" : "ticket"}>
       <div className="title">title: {ticket.title}</div>
+      <button className="hideTicketButton" onClick={hide}>
+        Hidden
+      </button>
       <div className="content">content: {ticket.content}</div>
       <div className="labels-div">
         {ticket.labels?.map((label, i) => (
@@ -29,13 +32,15 @@ export default function Ticket({
         ))}
       </div>
       <div className="date">
-        user Email: {ticket.userEmail} | creation Time:{" "}
-        {new Date(ticket.creationTime).toLocaleString()}
+        <span className="user-email">
+          {" "}
+          <a href="#">{ticket.userEmail}</a>{" "}
+        </span>
+        |{" "}
+        <span className="span-date">
+          {new Date(ticket.creationTime).toLocaleString()}
+        </span>
       </div>
-      <button className="hideTicketButton" onClick={hide}>
-        Hidden
-      </button>
-      <hr />
     </div>
   );
 }
