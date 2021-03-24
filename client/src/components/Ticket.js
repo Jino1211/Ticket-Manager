@@ -19,13 +19,14 @@ export default function Ticket({
     temp.push(ticket);
     setHideTickets(temp);
   };
+
   return (
     <div className={ticket.hide ? "ticket-hidden" : "ticket"}>
-      <div className="title">title: {ticket.title}</div>
+      <div className="title"> {ticket.title}</div>
       <button className="hideTicketButton" onClick={hide}>
         Hidden
       </button>
-      <div className="content">content: {ticket.content}</div>
+      <div className="content"> {ticket.content}</div>
       <div className="labels-div">
         {ticket.labels?.map((label, i) => (
           <Label key={`label-${i}`} label={label} />

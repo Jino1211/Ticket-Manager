@@ -1,0 +1,13 @@
+.label {
+  padding: 1%;
+  border: rgb(169, 218, 165) solid 0.125em;
+  color: rgb(83, 55, 3);
+  border-radius: 3em;
+  font-size: 80%;
+}
+.labels-div {
+  display: flex;
+  width: 20%;
+  float: right;
+  justify-content: space-evenly;
+}

@@ -39,8 +39,9 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
+  //
   const limitView = (e) => {
-    if (!e.target.value) return setAllTickets(originalTickets);
+    if (e.target.value === "All") return setAllTickets(originalTickets);
     const viewNumber = e.target.value;
     const limitTickets = [];
     if (index >= originalTickets.length) return;
@@ -54,19 +55,15 @@ export default function SearchArea() {
   };
 
   const nextPage = () => {
-    console.log(pageIndex);
-    console.log(index);
     let bool = false;
     const limitTickets = [];
     for (let i = pageIndex; i <= Number(pageIndex) + Number(index); i++) {
       if (i >= originalTickets.length) {
         setAllTickets(limitTickets);
         bool = true;
-        console.log("sad");
         break;
       }
       limitTickets.push(originalTickets[i]);
-      console.log(i);
     }
     bool ? setPageIndex(0) : setPageIndex(Number(pageIndex) + Number(index));
     setAllTickets(limitTickets);
@@ -135,15 +132,20 @@ export default function SearchArea() {
           <span> Hidden tasks</span>
         </div>
       )}
-      <label>Number of ticket</label>
+      <label className="view-span"></label>
       <select onChange={limitView} className="limited-tickets">
-        <option>{false}</option>
+        <option value="" selected disabled hidden>
+          How Many Tickets
+        </option>
+        <option>All</option>
         <option value={20}>20</option>
         <option value={30}>30</option>
         <option value={40}>40</option>
         <option value={50}>50</option>
       </select>
-      <button onClick={nextPage}>next</button>
+      <button onClick={nextPage} className="next-btn">
+        next
+      </button>
       <div className="labels-menu">
         {labels.map((label, i) => (
           <span
@@ -161,12 +163,7 @@ export default function SearchArea() {
         counterHiddenTickets={counterHiddenTickets}
         setHideTickets={setHideTickets}
         hideTickets={hideTickets}
-        // setAllTickets={setAllTickets}
-        // setOriginalTickets={setOriginalTickets}
-        // originalTickets={originalTickets}
       />
     </div>
   );
 }
-
-////////////
