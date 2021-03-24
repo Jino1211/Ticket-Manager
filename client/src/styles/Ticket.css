@@ -1,3 +1,57 @@
 .ticket-hidden {
   display: none;
 }
+.ticket {
+  border: rgb(169, 218, 165) solid 0.125em;
+  background-color: burlywood;
+  border-radius: 5em;
+  width: 70%;
+  margin: 2% auto;
+  padding: 3%;
+}
+.ticket:hover > .content {
+  height: max-content;
+}
+
+.hideTicketButton {
+  background-color: burlywood;
+  border: burlywood solid;
+  color: burlywood;
+  position: relative;
+  outline: none;
+  display: flex;
+  left: 90%;
+}
+.ticket:hover > .hideTicketButton {
+  background-color: burlywood;
+  border: rgb(226, 112, 112) solid;
+  color: rgb(226, 112, 112);
+  position: relative;
+  outline: none;
+  display: flex;
+  left: 90%;
+}
+.title {
+  display: inline-block;
+  font-size: 120%;
+  font-weight: bold;
+}
+.date {
+  font-size: 75%;
+  display: flex;
+  padding-top: 4%;
+  align-content: space-between;
+}
+.span-date {
+  padding-left: 1.5%;
+}
+.user-email {
+  padding-right: 1.5%;
+}
+.content {
+  overflow-y: scroll;
+  overflow: hidden;
+  display: flex;
+  padding-top: 2%;
+  height: 3em;
+}

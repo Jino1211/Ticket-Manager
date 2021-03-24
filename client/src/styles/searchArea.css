@@ -1,0 +1,59 @@
+h1 {
+  margin: 0;
+  padding: 2%;
+}
+button {
+  cursor: pointer;
+}
+.label-menu {
+  display: inline-block;
+  margin: 1%;
+  padding: 0.2%;
+  border: rgb(169, 218, 165) solid 0.125em;
+  border-radius: 10%;
+  cursor: pointer;
+  color: rgb(83, 55, 3);
+  font-weight: bold;
+  text-shadow: 0.2em 0.2em rgb(169, 218, 165);
+}
+.label-menu:hover {
+  padding: 0.3%;
+}
+.search-input {
+  background-color: rgb(242, 250, 221);
+  width: 15%;
+  text-align: center;
+  border-radius: 2em;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5.5%;
+  text-align: center;
+  background-color: #ffe4e4;
+  margin-bottom: 0.1%;
+  opacity: 0.6;
+}
+.footer-content-right {
+  padding-right: 1.5%;
+
+  float: right;
+}
+.icon-style {
+  margin-top: 2%;
+  height: 2em;
+  margin-left: 1em;
+}
+.icon-style:hover {
+  background-color: yellow;
+  padding: 0.2em;
+}
+.name {
+  float: left;
+  margin-bottom: 1%;
+  font-weight: 1000;
+  font-size: 110%;
+  font-family: "Englebert", sans-serif;
+}
