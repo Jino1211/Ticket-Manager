@@ -32,17 +32,24 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
-  //Get the all ticket that match to the input search
-  const getTicketBySearch = (e) => {
+  //Get the all ticket that match to the input search. set persistent, if the ticket is hide he doesn't display when you search
+  const getTicketBySearch = async (e) => {
     const inputValue = e.target.value;
-    axios
-      .get(`/api/tickets?searchText=${inputValue}`)
-      .then((res) => {
-        setAllTickets(res.data);
-      })
-      .catch((e) => {
-        console.log(e);
+    try {
+      const res = await axios.get(`/api/tickets?searchText=${inputValue}`);
+      let tempTicket = [];
+      res.data.forEach((newTicket) => {
+        let bool = true;
+        allTickets.forEach((oldTicket) => {
+          if (oldTicket.content === newTicket.content && oldTicket.hide)
+            bool = false;
+        });
+        if (bool) tempTicket.push(newTicket);
       });
+      setAllTickets(tempTicket ? tempTicket : res.data);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   //Restore all the hidden ticket
@@ -54,18 +61,22 @@ export default function SearchArea() {
 
   return (
     <div className="main">
-      {counterHiddenTickets && (
-        <button id="restoreHideTickets" onClick={restoreAll}>
-          restoreAll
-        </button>
-      )}
       <input
         className="search-input"
         id="searchInput"
         placeholder="Search your tickets"
         onChange={getTicketBySearch}
       ></input>
-      <div id="hideTicketsCounter">{counterHiddenTickets}</div>
+      {counterHiddenTickets && (
+        <div className="restore-div">
+          <button id="restoreHideTickets" onClick={restoreAll}>
+            restoreAll
+          </button>
+          <br />
+          <span id="hideTicketsCounter">{counterHiddenTickets}</span>
+          <span> Hidden tasks</span>
+        </div>
+      )}
       <div className="labels-menu">
         {labels.map((label, i) => (
           <span className="label-menu" key={`label-${i}`}>
