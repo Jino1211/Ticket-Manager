@@ -22,6 +22,7 @@ export default function SearchArea() {
   const [counterHiddenTickets, setCounterHiddenTickets] = useState();
   const [originalTickets, setOriginalTickets] = useState([]);
   const [filterLabel, setFilterLabel] = useState([]);
+  const [hideTickets, setHideTickets] = useState([]);
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -38,14 +39,14 @@ export default function SearchArea() {
   //Get the all ticket that match to the input search. set persistent, ticket that is hidden doesn't display when you search
   const getTicketBySearch = async (e) => {
     const inputValue = e.target.value;
+    console.log(inputValue);
     try {
       const res = await axios.get(`/api/tickets?searchText=${inputValue}`);
       let tempTicket = [];
       res.data.forEach((newTicket) => {
         let bool = true;
-        allTickets.forEach((oldTicket) => {
-          if (oldTicket.content === newTicket.content && oldTicket.hide)
-            bool = false;
+        hideTickets.forEach((hideTicket) => {
+          if (hideTicket.content === newTicket.content) bool = false;
         });
         if (bool) tempTicket.push(newTicket);
       });
@@ -57,9 +58,10 @@ export default function SearchArea() {
 
   //Restore all the hidden ticket
   const restoreAll = () => {
-    allTickets.forEach((ticket) => (ticket.hide = false));
+    originalTickets.forEach((ticket) => (ticket.hide = false));
     setCounterHiddenTickets();
-    setAllTickets(allTickets);
+    setAllTickets(originalTickets);
+    setHideTickets([]);
   };
 
   //Click on specific label it's render the ticket that have that label
@@ -113,8 +115,14 @@ export default function SearchArea() {
         allTickets={allTickets}
         setCounterHiddenTickets={setCounterHiddenTickets}
         counterHiddenTickets={counterHiddenTickets}
-        setAllTickets={setAllTickets}
+        setHideTickets={setHideTickets}
+        hideTickets={hideTickets}
+        // setAllTickets={setAllTickets}
+        // setOriginalTickets={setOriginalTickets}
+        // originalTickets={originalTickets}
       />
     </div>
   );
 }
+
+////////////

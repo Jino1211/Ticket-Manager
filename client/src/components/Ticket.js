@@ -6,6 +6,8 @@ export default function Ticket({
   ticket,
   setCounterHiddenTickets,
   counterHiddenTickets,
+  setHideTickets,
+  hideTickets,
 }) {
   //Responsible to hide the ticket when click on the "hide" button
   const hide = (e) => {
@@ -13,6 +15,9 @@ export default function Ticket({
     setCounterHiddenTickets(
       counterHiddenTickets ? counterHiddenTickets + 1 : 1
     );
+    const temp = hideTickets;
+    temp.push(ticket);
+    setHideTickets(temp);
   };
   return (
     <div className={ticket.hide ? "ticket-hidden" : "ticket"}>

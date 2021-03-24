@@ -5,7 +5,11 @@ export default function TicketsList({
   allTickets,
   setCounterHiddenTickets,
   counterHiddenTickets,
-  setAllTickets,
+  setHideTickets,
+  hideTickets,
+  // setAllTickets,
+  // setOriginalTickets,
+  // originalTickets,
 }) {
   return (
     <>
@@ -16,7 +20,12 @@ export default function TicketsList({
             ticket={ticket}
             setCounterHiddenTickets={setCounterHiddenTickets}
             counterHiddenTickets={counterHiddenTickets}
-            setAllTickets={setAllTickets}
+            setHideTickets={setHideTickets}
+            hideTickets={hideTickets}
+            // setAllTickets={setAllTickets}
+            // setOriginalTickets={setOriginalTickets}
+            // allTickets={allTickets}
+            // originalTickets={originalTickets}
           />
         ))}
       </div>
