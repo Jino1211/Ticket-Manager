@@ -20,6 +20,8 @@ export default function SearchArea() {
 
   const [allTickets, setAllTickets] = useState([]);
   const [counterHiddenTickets, setCounterHiddenTickets] = useState();
+  const [originalTickets, setOriginalTickets] = useState([]);
+  const [filterLabel, setFilterLabel] = useState([]);
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -27,12 +29,13 @@ export default function SearchArea() {
       .get("/api/tickets")
       .then((tickets) => {
         tickets.data.forEach((ticket) => (ticket.hidden = false));
+        setOriginalTickets(tickets.data);
         setAllTickets(tickets.data);
       })
       .catch((e) => console.log(e));
   }, []);
 
-  //Get the all ticket that match to the input search. set persistent, if the ticket is hide he doesn't display when you search
+  //Get the all ticket that match to the input search. set persistent, ticket that is hidden doesn't display when you search
   const getTicketBySearch = async (e) => {
     const inputValue = e.target.value;
     try {
@@ -46,7 +49,7 @@ export default function SearchArea() {
         });
         if (bool) tempTicket.push(newTicket);
       });
-      setAllTickets(tempTicket ? tempTicket : res.data);
+      setAllTickets(tempTicket);
     } catch (e) {
       console.log(e);
     }
@@ -57,6 +60,24 @@ export default function SearchArea() {
     allTickets.forEach((ticket) => (ticket.hide = false));
     setCounterHiddenTickets();
     setAllTickets(allTickets);
+  };
+
+  //Click on specific label it's render the ticket that have that label
+  const filteringByLabel = (e) => {
+    const inputLabel = e.target.innerText;
+
+    if (filterLabel.includes(inputLabel)) {
+      setFilterLabel([]);
+      setAllTickets(originalTickets);
+    } else {
+      const temp = originalTickets.filter((ticket) =>
+        ticket.labels.includes(inputLabel)
+      );
+      const arr = filterLabel;
+      arr.push(inputLabel);
+      setFilterLabel(arr);
+      setAllTickets(temp.slice());
+    }
   };
 
   return (
@@ -79,8 +100,12 @@ export default function SearchArea() {
       )}
       <div className="labels-menu">
         {labels.map((label, i) => (
-          <span className="label-menu" key={`label-${i}`}>
-            {label}{" "}
+          <span
+            className="label-menu"
+            key={`label-${i}`}
+            onClick={filteringByLabel}
+          >
+            {label}
           </span>
         ))}
       </div>
