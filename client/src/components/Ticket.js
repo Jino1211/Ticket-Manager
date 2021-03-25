@@ -2,7 +2,7 @@ import React from "react";
 import Label from "./Label";
 import "../styles/Ticket.css";
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Ticket({
   ticket,
@@ -10,7 +10,11 @@ export default function Ticket({
   counterHiddenTickets,
   setHideTickets,
   hideTickets,
+  ticketCondition,
 }) {
+  useEffect(() => {
+    if (ticketCondition) setInitCondition(true);
+  }, []);
   //Responsible to hide the ticket when click on the "hide" button
   const hide = (e) => {
     ticket.hide = true;
@@ -24,8 +28,11 @@ export default function Ticket({
 
   const [condition, setCondition] = useState("");
   const [conditionClass, setConditionClass] = useState("");
+  const [initCondition, setInitCondition] = useState();
 
+  //Done or unDone function
   const doneUndone = async (e) => {
+    setInitCondition();
     if (e.target.checked) {
       try {
         axios.patch(`/api/tickets/${ticket._id}/done`);
@@ -64,6 +71,7 @@ export default function Ticket({
           className="check-box"
           type="checkbox"
           onChange={doneUndone}
+          checked={initCondition}
         ></input>
         <span className="slider"></span>
         <span className={conditionClass}>{condition}</span>

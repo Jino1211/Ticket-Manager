@@ -19,6 +19,7 @@ export default function TicketsList({
             counterHiddenTickets={counterHiddenTickets}
             setHideTickets={setHideTickets}
             hideTickets={hideTickets}
+            ticketCondition={ticket.done}
           />
         ))}
       </div>
