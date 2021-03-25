@@ -26,6 +26,8 @@ export default function SearchArea() {
   const [hideTickets, setHideTickets] = useState([]);
   const [index, setIndex] = useState();
   const [pageIndex, setPageIndex] = useState();
+  const [numOfTickets, setNumOfTickets] = useState();
+  const [tempText, setTempText] = useState("");
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -39,6 +41,13 @@ export default function SearchArea() {
       .catch((e) => console.log(e));
   }, []);
 
+  useEffect(() => {
+    setNumOfTickets(
+      counterHiddenTickets && filterLabel.length === 0
+        ? allTickets.length - counterHiddenTickets
+        : allTickets.length
+    );
+  }, [allTickets, counterHiddenTickets]);
   //
   const limitView = (e) => {
     if (e.target.value === "All") return setAllTickets(originalTickets);
@@ -57,8 +66,8 @@ export default function SearchArea() {
   const nextPage = () => {
     let bool = false;
     const limitTickets = [];
-    for (let i = pageIndex; i <= Number(pageIndex) + Number(index); i++) {
-      if (i >= originalTickets.length) {
+    for (let i = pageIndex; i < Number(pageIndex) + Number(index); i++) {
+      if (i >= originalTickets.length - 1) {
         setAllTickets(limitTickets);
         bool = true;
         break;
@@ -72,6 +81,7 @@ export default function SearchArea() {
   //Get the all ticket that match to the input search. set persistent, ticket that is hidden doesn't display when you search
   const getTicketBySearch = async (e) => {
     const inputValue = e.target.value;
+    setTempText(inputValue);
     try {
       const res = await axios.get(`/api/tickets?searchText=${inputValue}`);
       let tempTicket = [];
@@ -90,9 +100,12 @@ export default function SearchArea() {
 
   //Restore all the hidden ticket
   const restoreAll = () => {
-    originalTickets.forEach((ticket) => (ticket.hide = false));
+    const ticketsToDisplay = originalTickets.filter((ticket) => {
+      ticket.hide = false;
+      return ticket.title.toLowerCase().includes(tempText.toLowerCase());
+    });
     setCounterHiddenTickets();
-    setAllTickets(originalTickets);
+    setAllTickets(ticketsToDisplay);
     setHideTickets([]);
   };
 
@@ -122,16 +135,6 @@ export default function SearchArea() {
         placeholder="Search your tickets"
         onChange={getTicketBySearch}
       ></input>
-      {counterHiddenTickets && (
-        <div className="restore-div">
-          <button id="restoreHideTickets" onClick={restoreAll}>
-            restoreAll
-          </button>
-          <br />
-          <span id="hideTicketsCounter">{counterHiddenTickets}</span>
-          <span> Hidden tasks</span>
-        </div>
-      )}
       <label className="view-span"></label>
       <select onChange={limitView} className="limited-tickets">
         <option value="" selected disabled hidden>
@@ -157,6 +160,27 @@ export default function SearchArea() {
           </span>
         ))}
       </div>
+      <p className="counter">{numOfTickets} Active Tickets</p>
+      {counterHiddenTickets && (
+        <div className="hidden-details">
+          <span id="hideTicketsCounter">{counterHiddenTickets}</span>
+          <span className="hidden-tasks">
+            {" "}
+            Hidden {counterHiddenTickets > 1 ? `Tasks` : `Task`}
+          </span>
+          <button id="restoreHideTickets" onClick={restoreAll}>
+            Restore All
+            <div className="tool-tip-text">
+              {hideTickets.map((hideTicket, i) => (
+                <span key={`hideTicket-${i}`} className="title-tip-text">
+                  * {hideTicket.title}
+                  <hr />
+                </span>
+              ))}
+            </div>
+          </button>
+        </div>
+      )}
       <TicketsList
         allTickets={allTickets}
         setCounterHiddenTickets={setCounterHiddenTickets}

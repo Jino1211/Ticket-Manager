@@ -24,7 +24,7 @@ export default function Ticket({
     <div className={ticket.hide ? "ticket-hidden" : "ticket"}>
       <div className="title"> {ticket.title}</div>
       <button className="hideTicketButton" onClick={hide}>
-        Hidden
+        Hide
       </button>
       <div className="content"> {ticket.content}</div>
       <div className="labels-div">

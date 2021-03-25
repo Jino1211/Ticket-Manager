@@ -9,6 +9,9 @@
   margin: 2% auto;
   padding: 3%;
   box-shadow: 0.5em 0.2em 1em rgb(169, 218, 165);
+  font-family: "Permanent Marker", cursive;
+  letter-spacing: 0.1em;
+  word-spacing: 0.1em;
 }
 .ticket:hover > .content {
   min-height: 3em;
@@ -26,12 +29,13 @@
 }
 .ticket:hover > .hideTicketButton {
   background-color: burlywood;
-  border: rgb(226, 112, 112) solid;
+  /* border: rgb(226, 112, 112) solid; */
   color: rgb(226, 112, 112);
   position: relative;
   outline: none;
   display: flex;
   left: 90%;
+  text-decoration: underline;
 }
 .title {
   display: inline-block;
