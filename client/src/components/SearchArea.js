@@ -32,6 +32,7 @@ export default function SearchArea() {
   const [spinner, setSpinner] = useState("spinner");
   const [blur, setBlur] = useState("blur");
   const [notFoundMessage, setNotFoundMessage] = useState();
+  const [deleted, setDeleted] = useState([]);
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -51,7 +52,17 @@ export default function SearchArea() {
         setSpinner("spinner");
         setBlur("blur");
       });
-  }, []);
+  }, [deleted]);
+
+  //Delete function, send axios request to delete tickets by ID
+  const deleteTicket = (ticket) => {
+    console.log(ticket._id);
+    axios
+      .delete(`/api/tickets/${ticket._id}`)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
+    setDeleted(deleted.slice());
+  };
 
   //Reacting to page, show the number of the activate tickets
   useEffect(() => {
@@ -236,6 +247,7 @@ export default function SearchArea() {
           counterHiddenTickets={counterHiddenTickets}
           setHideTickets={setHideTickets}
           hideTickets={hideTickets}
+          deleteTicket={deleteTicket}
         />
       </div>
     </div>

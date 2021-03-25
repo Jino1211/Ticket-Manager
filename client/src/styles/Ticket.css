@@ -125,3 +125,13 @@ input:checked + .slider:before {
   -o-transition: opacity 5s ease-in-out;
   opacity: 0;
 }
+.delete-btn {
+  width: 1.5%;
+  cursor: pointer;
+  display: none;
+}
+.ticket:hover > .delete-btn {
+  width: 1.5%;
+  cursor: pointer;
+  display: inline-block;
+}

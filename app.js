@@ -62,6 +62,7 @@ app.patch("/api/tickets/:ticketsId/undone", (req, res) => {
     });
 });
 
+//POST request create new ticket
 app.post("/api/tickets/new", async (req, res) => {
   const { title, content, userEmail, done, creationTime, labels } = req.body;
   console.log(req.body);
@@ -82,6 +83,17 @@ app.post("/api/tickets/new", async (req, res) => {
     res.status(500).json({ ERROR: "HAHHA" });
   }
   res.send();
+});
+
+//DELETE request delete ticket by id
+app.delete("/api/tickets/:id", (req, res) => {
+  const { id } = req.params;
+  Tickets.deleteOne({ _id: id })
+    .then((data) => {
+      console.log(data);
+      res.status(204).end();
+    })
+    .catch((e) => res.status(500).json({ ERROR: "Server Error" }));
 });
 
 module.exports = app;

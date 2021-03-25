@@ -3,6 +3,7 @@ import Label from "./Label";
 import "../styles/Ticket.css";
 import axios from "axios";
 import { useState, useEffect } from "react";
+import deleteImg from "../photos/delete.jpg";
 
 export default function Ticket({
   ticket,
@@ -11,6 +12,7 @@ export default function Ticket({
   setHideTickets,
   hideTickets,
   ticketCondition,
+  deleteTicket,
 }) {
   useEffect(() => {
     if (ticketCondition) setInitCondition(true);
@@ -97,6 +99,11 @@ export default function Ticket({
           {new Date(ticket.creationTime).toLocaleString()}
         </span>
       </div>
+      <img
+        className="delete-btn"
+        src={deleteImg}
+        onClick={() => deleteTicket(ticket)}
+      ></img>
     </div>
   );
 }

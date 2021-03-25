@@ -7,6 +7,7 @@ export default function TicketsList({
   counterHiddenTickets,
   setHideTickets,
   hideTickets,
+  deleteTicket,
 }) {
   return (
     <>
@@ -20,6 +21,7 @@ export default function TicketsList({
             setHideTickets={setHideTickets}
             hideTickets={hideTickets}
             ticketCondition={ticket.done}
+            deleteTicket={deleteTicket}
           />
         ))}
       </div>
