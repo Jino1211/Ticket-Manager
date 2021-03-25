@@ -3,7 +3,7 @@ import "../styles/searchArea.css";
 import TicketsList from "./TicketsList";
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import "../styles/spinner.css";
 export default function SearchArea() {
   const labels = [
     "Help",
@@ -28,23 +28,35 @@ export default function SearchArea() {
   const [pageIndex, setPageIndex] = useState();
   const [numOfTickets, setNumOfTickets] = useState();
   const [tempText, setTempText] = useState("");
+  const [spinner, setSpinner] = useState("spinner");
+  const [blur, setBlur] = useState("blur");
 
   //GET all ticket when the page is loading first
   useEffect(() => {
+    setSpinner("display-spinner");
+    setBlur("display-blur");
     axios
       .get("/api/tickets")
       .then((tickets) => {
         tickets.data.forEach((ticket) => (ticket.hidden = false));
         setOriginalTickets(tickets.data);
         setAllTickets(tickets.data);
+        setSpinner("spinner");
+        setBlur("blur");
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        console.log(e);
+        setSpinner("spinner");
+        setBlur("blur");
+      });
   }, []);
 
   useEffect(() => {
     setNumOfTickets(
       counterHiddenTickets && filterLabel.length === 0
         ? allTickets.length - counterHiddenTickets
+        : counterHiddenTickets && filterLabel.length !== 0
+        ? allTickets.length
         : allTickets.length
     );
   }, [allTickets, counterHiddenTickets]);
@@ -83,6 +95,8 @@ export default function SearchArea() {
     const inputValue = e.target.value;
     setTempText(inputValue);
     try {
+      setSpinner("display-spinner");
+      setBlur("display-blur");
       const res = await axios.get(`/api/tickets?searchText=${inputValue}`);
       let tempTicket = [];
       res.data.forEach((newTicket) => {
@@ -93,8 +107,12 @@ export default function SearchArea() {
         if (bool) tempTicket.push(newTicket);
       });
       setAllTickets(tempTicket);
+      setSpinner("spinner");
+      setBlur("blur");
     } catch (e) {
       console.log(e);
+      setSpinner("spinner");
+      setBlur("blur");
     }
   };
 
@@ -160,34 +178,48 @@ export default function SearchArea() {
           </span>
         ))}
       </div>
-      <p className="counter">{numOfTickets} Active Tickets</p>
-      {counterHiddenTickets && (
-        <div className="hidden-details">
-          <span id="hideTicketsCounter">{counterHiddenTickets}</span>
-          <span className="hidden-tasks">
-            {" "}
-            Hidden {counterHiddenTickets > 1 ? `Tasks` : `Task`}
-          </span>
-          <button id="restoreHideTickets" onClick={restoreAll}>
-            Restore All
-            <div className="tool-tip-text">
-              {hideTickets.map((hideTicket, i) => (
-                <span key={`hideTicket-${i}`} className="title-tip-text">
-                  * {hideTicket.title}
-                  <hr />
-                </span>
-              ))}
-            </div>
-          </button>
-        </div>
-      )}
-      <TicketsList
-        allTickets={allTickets}
-        setCounterHiddenTickets={setCounterHiddenTickets}
-        counterHiddenTickets={counterHiddenTickets}
-        setHideTickets={setHideTickets}
-        hideTickets={hideTickets}
-      />
+      <div className={spinner}>
+        {" "}
+        <span>L</span>
+        <span>O</span>
+        <span>A</span>
+        <span>D</span>
+        <span>I</span>
+        <span>N</span>
+        <span>G</span>
+      </div>
+      <div className={blur}>
+        <p className="counter">{numOfTickets} Active Tickets</p>
+        {counterHiddenTickets && (
+          <div className="hidden-details">
+            <span id="hideTicketsCounter">{counterHiddenTickets}</span>
+            <span className="hidden-tasks">
+              {" "}
+              Hidden {counterHiddenTickets > 1 ? `Tasks` : `Task`}
+            </span>
+            <button id="restoreHideTickets" onClick={restoreAll}>
+              Restore All
+              <div className="tool-tip-text">
+                {hideTickets.map((hideTicket, i) => (
+                  <span key={`hideTicket-${i}`} className="title-tip-text">
+                    * {hideTicket.title}
+                    <hr />
+                  </span>
+                ))}
+              </div>
+            </button>
+          </div>
+        )}
+      </div>
+      <div className={blur}>
+        <TicketsList
+          allTickets={allTickets}
+          setCounterHiddenTickets={setCounterHiddenTickets}
+          counterHiddenTickets={counterHiddenTickets}
+          setHideTickets={setHideTickets}
+          hideTickets={hideTickets}
+        />
+      </div>
     </div>
   );
 }

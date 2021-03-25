@@ -152,3 +152,9 @@ button {
   max-height: 0.2px;
   margin: 0.2em;
 }
+
+.blur {
+}
+.display-blur {
+  filter: blur(8px);
+}
