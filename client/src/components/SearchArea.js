@@ -30,6 +30,7 @@ export default function SearchArea() {
   const [tempText, setTempText] = useState("");
   const [spinner, setSpinner] = useState("spinner");
   const [blur, setBlur] = useState("blur");
+  const [notFoundMessage, setNotFoundMessage] = useState();
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -61,6 +62,13 @@ export default function SearchArea() {
         : allTickets.length
     );
   }, [allTickets, counterHiddenTickets]);
+
+  //Response to display on DOM "Not Found" message when no tickets that match to search
+  useEffect(() => {
+    allTickets.length === 0
+      ? setNotFoundMessage("Not Found")
+      : setNotFoundMessage();
+  });
 
   //Limited the number of tickets that display on DOM
   const limitView = (e) => {
@@ -219,6 +227,7 @@ export default function SearchArea() {
         )}
       </div>
       <div className={blur}>
+        <p className="notFoundMessage">{notFoundMessage}</p>
         <TicketsList
           allTickets={allTickets}
           setCounterHiddenTickets={setCounterHiddenTickets}

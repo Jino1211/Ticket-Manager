@@ -15,6 +15,7 @@ export default function Ticket({
   useEffect(() => {
     if (ticketCondition) setInitCondition(true);
   }, []);
+
   //Responsible to hide the ticket when click on the "hide" button
   const hide = (e) => {
     ticket.hide = true;
@@ -36,7 +37,7 @@ export default function Ticket({
     if (e.target.checked) {
       try {
         axios.patch(`/api/tickets/${ticket._id}/done`);
-        setCondition("Saved!");
+        setCondition("Done Saved!");
         setConditionClass("condition");
       } catch (e) {
         setCondition("FAILED!");
@@ -50,7 +51,7 @@ export default function Ticket({
     } else {
       try {
         axios.patch(`/api/tickets/${ticket._id}/undone`);
-        setCondition("Saved!");
+        setCondition("unDone Saved!");
         setConditionClass("condition");
       } catch (e) {
         setCondition("FAILED!");

@@ -119,12 +119,6 @@ input:checked + .slider:before {
 }
 
 .condition {
-  /* width: 50%; */
-  /* margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  background-color: #ff0000;
-  margin-top: 20px; */
   -webkit-transition: opacity 5s ease-in-out;
   -moz-transition: opacity 35s ease-in-out;
   -ms-transition: opacity 5s ease-in-out;

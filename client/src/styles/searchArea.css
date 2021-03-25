@@ -152,7 +152,9 @@ button {
   max-height: 0.2px;
   margin: 0.2em;
 }
-
+.notFoundMessage {
+  font-family: "Permanent Marker", cursive;
+}
 .blur {
 }
 .display-blur {
