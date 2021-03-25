@@ -1,6 +1,8 @@
 import React from "react";
 import Label from "./Label";
 import "../styles/Ticket.css";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Ticket({
   ticket,
@@ -20,8 +22,52 @@ export default function Ticket({
     setHideTickets(temp);
   };
 
+  const [condition, setCondition] = useState("");
+  const [conditionClass, setConditionClass] = useState("");
+
+  const doneUndone = async (e) => {
+    if (e.target.checked) {
+      try {
+        axios.patch(`/api/tickets/${ticket._id}/done`);
+        setCondition("Saved!");
+        setConditionClass("condition");
+      } catch (e) {
+        setCondition("FAILED!");
+        setConditionClass("condition");
+        e.target.checked = false;
+      }
+      setTimeout(() => {
+        setCondition("");
+        setConditionClass("");
+      }, 4000);
+    } else {
+      try {
+        axios.patch(`/api/tickets/${ticket._id}/undone`);
+        setCondition("Saved!");
+        setConditionClass("condition");
+      } catch (e) {
+        setCondition("FAILED!");
+        setConditionClass("condition");
+        e.target.checked = false;
+      }
+      setTimeout(() => {
+        setCondition("");
+        setConditionClass("");
+      }, 4000);
+    }
+  };
+
   return (
     <div className={ticket.hide ? "ticket-hidden" : "ticket"}>
+      <label className="switch">
+        <input
+          className="check-box"
+          type="checkbox"
+          onChange={doneUndone}
+        ></input>
+        <span className="slider"></span>
+        <span className={conditionClass}>{condition}</span>
+      </label>
       <div className="title"> {ticket.title}</div>
       <button className="hideTicketButton" onClick={hide}>
         Hide

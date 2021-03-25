@@ -51,6 +51,7 @@ export default function SearchArea() {
       });
   }, []);
 
+  //Reacting to page, show the number of the activate tickets
   useEffect(() => {
     setNumOfTickets(
       counterHiddenTickets && filterLabel.length === 0
@@ -60,7 +61,8 @@ export default function SearchArea() {
         : allTickets.length
     );
   }, [allTickets, counterHiddenTickets]);
-  //
+
+  //Limited the number of tickets that display on DOM
   const limitView = (e) => {
     if (e.target.value === "All") return setAllTickets(originalTickets);
     const viewNumber = e.target.value;
@@ -75,6 +77,7 @@ export default function SearchArea() {
     setAllTickets(limitTickets);
   };
 
+  //Display the next ticket
   const nextPage = () => {
     let bool = false;
     const limitTickets = [];
@@ -189,7 +192,11 @@ export default function SearchArea() {
         <span>G</span>
       </div>
       <div className={blur}>
-        <p className="counter">{numOfTickets} Active Tickets</p>
+        <p className="counter">
+          {numOfTickets > 1
+            ? `${numOfTickets} Tickets display`
+            : `${numOfTickets} Ticket display`}
+        </p>
         {counterHiddenTickets && (
           <div className="hidden-details">
             <span id="hideTicketsCounter">{counterHiddenTickets}</span>
