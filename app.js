@@ -5,6 +5,11 @@ const Tickets = require("./models/tickets");
 
 app.use(express.static("client/build"));
 app.use(express.json());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 //GET all ticket. and also filter the data if receive query.
 app.get("/api/tickets", async (req, res) => {
@@ -55,6 +60,28 @@ app.patch("/api/tickets/:ticketsId/undone", (req, res) => {
         res.status(500).json({ Error: "Mongoose error", updated: false });
       }
     });
+});
+
+app.post("/api/tickets/new", async (req, res) => {
+  const { title, content, userEmail, done, creationTime, labels } = req.body;
+  console.log(req.body);
+  try {
+    const newTicket = new Tickets({
+      title,
+      content,
+      userEmail,
+      done,
+      creationTime,
+      labels,
+    });
+
+    const doc = await newTicket.save();
+    return res.status(200).json(newTicket);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ ERROR: "HAHHA" });
+  }
+  res.send();
 });
 
 module.exports = app;

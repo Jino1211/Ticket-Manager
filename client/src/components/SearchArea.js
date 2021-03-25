@@ -4,6 +4,7 @@ import TicketsList from "./TicketsList";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../styles/spinner.css";
+import PostTicket from "./PostTicket";
 export default function SearchArea() {
   const labels = [
     "Help",
@@ -228,6 +229,7 @@ export default function SearchArea() {
       </div>
       <div className={blur}>
         <p className="notFoundMessage">{notFoundMessage}</p>
+        <PostTicket />
         <TicketsList
           allTickets={allTickets}
           setCounterHiddenTickets={setCounterHiddenTickets}
