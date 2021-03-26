@@ -8,13 +8,29 @@ Also added some bonus:
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can Add new ticket from client.
 
-<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can delete ticket from client.
+##
+
+![gif](screen-capture.gif)
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can choose how many ticket to display on page.
+
+![gif](screen-capture2.gif)
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can mark ticket as done .
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can mark ticket as undone .
+
+![gif](screen-capture1.gif)
+
+<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can watch all title's tickets that hide when hover on restore button.
+
+![gif](screen-capture3.gif)
+
+<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can filter tickets by label.
+
+![gif](screen-capture4.gif)
+
+<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can delete ticket from client.
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Done unDone is persistent.
 
@@ -23,12 +39,8 @@ request.
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Get massage saved/failed when create new ticket and mark Done/unDone ticket.
 
-<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can watch all title's tickets that hide when hover on restore button.
-
-<img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can filter tickets by label.
-
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Counter that show how many tickets display on page.
-![gif](screen-capture.gif)
-
 
 link to [HEROKU](https://jino-ticket-manager.herokuapp.com/)
+
+## @JINO1211 - YEHONATAN ROZMARIN
