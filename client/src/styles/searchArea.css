@@ -1,0 +1,181 @@
+:root {
+  --back-color: #94bbe9;
+  --menu-btns-back: rgb(169, 218, 165);
+  --letters-font: "Permanent Marker", cursive;
+}
+h1 {
+  margin: 0;
+  padding: 2%;
+  font-family: "Permanent Marker", cursive;
+  letter-spacing: 0.1em;
+}
+button {
+  cursor: pointer;
+}
+.saved-ticket {
+  font-family: var(--letters-font);
+  position: absolute;
+  right: 46%;
+  top: 9%;
+  color: rebeccapurple;
+  -webkit-transition: opacity 5s ease-in-out;
+  -moz-transition: opacity 35s ease-in-out;
+  -ms-transition: opacity 5s ease-in-out;
+  -o-transition: opacity 5s ease-in-out;
+  opacity: 0;
+}
+.label-menu {
+  display: inline-block;
+  margin: 1%;
+  padding: 0.2%;
+  border: rgb(169, 218, 165) solid 0.125em;
+  border-radius: 10%;
+  cursor: pointer;
+  color: rgb(83, 55, 3);
+  font-weight: bold;
+  text-shadow: 0.2em 0.2em var(--menu-btns-back);
+  font-family: var(--letters-font);
+  letter-spacing: 0.1em;
+}
+.label-menu:hover {
+  transform: scale(1.2);
+  -webkit-transform: scale(1.2);
+  background-color: rgb(169, 218, 165);
+  text-shadow: 0.3em 0.3em var(--menu-btns-back);
+}
+.label-menu:active {
+  transform: scale(1.4);
+  text-shadow: 0.3em 0.3em var(--menu-btns-back);
+}
+
+.search-input {
+  background-color: rgb(242, 250, 221);
+  width: 15%;
+  text-align: center;
+  border-radius: 2em;
+}
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 5.5%;
+  text-align: center;
+  background-color: #ffe4e4;
+  margin-bottom: 0.1%;
+  opacity: 0.6;
+}
+.footer-content-right {
+  padding-right: 1.5%;
+
+  float: right;
+}
+.icon-style {
+  margin-top: 2%;
+  height: 2em;
+  margin-left: 1em;
+}
+.icon-style:hover {
+  transform: scale(1.3);
+}
+.name {
+  float: left;
+  margin-bottom: 1%;
+  font-weight: 1000;
+  font-size: 110%;
+  font-family: "Englebert", sans-serif;
+}
+.limited-tickets {
+  border-radius: 2em;
+  width: 10%;
+  margin: 0% 1%;
+  background-color: rgb(242, 250, 221);
+  text-align: center;
+}
+.view-span {
+}
+.next-btn {
+  border-radius: 5em;
+  background-color: var(--back-color);
+}
+.counter {
+  display: inline-block;
+  padding-right: 2%;
+  font-weight: 600;
+  font-family: var(--letters-font);
+}
+.hidden-details {
+  display: inline-block;
+  width: 20%;
+  font-family: var(--letters-font);
+}
+#restoreHideTickets {
+  display: inline;
+  padding: 0%;
+  border: none;
+  background-color: var(--back-color);
+  padding-left: 2%;
+  text-decoration: underline;
+  color: rgb(83, 55, 3);
+  font-family: var(--letters-font);
+}
+
+#restoreHideTickets .tool-tip-text {
+  visibility: hidden;
+  width: 120px;
+  background-color: rgb(169, 218, 165);
+  color: black;
+  text-align: center;
+  border-radius: 1em;
+  /* padding: 5px 0; */
+  max-height: 15%;
+  word-wrap: break-word;
+  overflow-y: auto;
+
+  /* Position the tooltip */
+  position: absolute;
+
+  z-index: 1;
+}
+.tool-tip-text::-webkit-scrollbar-button {
+  display: none;
+}
+#restoreHideTickets:hover .tool-tip-text {
+  visibility: visible;
+}
+.title-tip-text {
+  /* word-wrap: break-word; */
+  display: block;
+}
+.tool-tip-text::-webkit-scrollbar {
+  width: 0.5em;
+}
+
+.tool-tip-text::-webkit-scrollbar-track {
+  background-color: none;
+}
+
+.tool-tip-text::-webkit-scrollbar-thumb {
+  background-color: rgb(155, 150, 150);
+  border-radius: 2em;
+  max-height: 0.2px;
+  margin: 0.2em;
+}
+.notFoundMessage {
+  font-family: "Permanent Marker", cursive;
+}
+.blur {
+}
+.display-blur {
+  filter: blur(8px);
+}
+.open-form {
+  box-shadow: gray 2px 3px 3px;
+  color: rgb(169, 218, 165);
+  background-color: rgb(83, 55, 3);
+  border: 4px inset rgb(118, 118, 118);
+  border-style: outset;
+}
+.open-form:hover {
+  transform: scale(1.4);
+}
