@@ -30,4 +30,4 @@ request.
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Counter that show how many tickets display on page.
 
 
-link to [HEROKU] (https://jino-ticket-manager.herokuapp.com/)
+link to [HEROKU](https://jino-ticket-manager.herokuapp.com/)
