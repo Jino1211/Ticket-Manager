@@ -13,10 +13,8 @@
   font-family: "Permanent Marker", cursive;
 }
 .labels-form {
-  /* display: flex; */
   padding: 1%;
   justify-content: space-between;
-  /* margin-top: 10%; */
 }
 .labels-form input {
   margin: 1%;
@@ -30,11 +28,7 @@
   margin: 0.1%;
 }
 .firs-line-form label {
-  /* display: flex; */
-  /* display: inline-flex; */
   padding: 1%;
-  /* margin: 1%; */
-  /* justify-content: space-evenly; */
 }
 .title-input {
   display: block;
@@ -49,9 +43,6 @@
   width: 30em;
 }
 .add-btn {
-  /* display: block; */
-  /* position: relative; */
-  /* top: 5%; */
   margin: auto;
   box-shadow: rgb(14, 13, 13) 1px 4px 3px;
   border: 0.1em solid rgb(175, 100, 3);

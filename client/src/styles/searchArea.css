@@ -14,9 +14,7 @@ button {
 }
 .saved-ticket {
   font-family: var(--letters-font);
-  /* display: flex; */
   position: absolute;
-  /* justify-content: center; */
   right: 46%;
   top: 9%;
   color: rebeccapurple;
@@ -42,17 +40,14 @@ button {
 .label-menu:hover {
   transform: scale(1.2);
   -webkit-transform: scale(1.2);
-  /* font-size: 120%; */
+  background-color: rgb(169, 218, 165);
   text-shadow: 0.3em 0.3em var(--menu-btns-back);
 }
 .label-menu:active {
   transform: scale(1.4);
   text-shadow: 0.3em 0.3em var(--menu-btns-back);
 }
-/* .label-menu:active {
-  font-size: 120%;
-  text-shadow: 0.3em 0.3em rgb(169, 218, 165);
-} */
+
 .search-input {
   background-color: rgb(242, 250, 221);
   width: 15%;
@@ -180,4 +175,7 @@ button {
   background-color: rgb(83, 55, 3);
   border: 4px inset rgb(118, 118, 118);
   border-style: outset;
+}
+.open-form:hover {
+  transform: scale(1.4);
 }
