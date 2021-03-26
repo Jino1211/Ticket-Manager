@@ -7,7 +7,7 @@ I created Ticket-Manager for management all the tickets that you need.
 Also added some bonus:
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can Add new ticket from client.
-[gif](<screen-capture(3).gif>)
+![gif](<screen-capture(3).gif>)
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can delete ticket from client.
 
 <img src="https://www.clipartmax.com/png/middle/70-703914_tickets-png-clipart-image-ticket-clip-art.png" height="20px"> Can choose how many ticket to display on page.
