@@ -33,6 +33,9 @@ export default function SearchArea() {
   const [blur, setBlur] = useState("blur");
   const [notFoundMessage, setNotFoundMessage] = useState();
   const [deleted, setDeleted] = useState([]);
+  const [displayForm, setDisplayForm] = useState();
+  const [saveTicket, setSaveTicket] = useState();
+  const [saveTicketClass, setSaveTicketClass] = useState();
 
   //GET all ticket when the page is loading first
   useEffect(() => {
@@ -54,16 +57,6 @@ export default function SearchArea() {
       });
   }, [deleted]);
 
-  //Delete function, send axios request to delete tickets by ID
-  const deleteTicket = (ticket) => {
-    console.log(ticket._id);
-    axios
-      .delete(`/api/tickets/${ticket._id}`)
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e));
-    setDeleted(deleted.slice());
-  };
-
   //Reacting to page, show the number of the activate tickets
   useEffect(() => {
     setNumOfTickets(
@@ -82,6 +75,16 @@ export default function SearchArea() {
       : setNotFoundMessage();
   });
 
+  //Delete function, send axios request to delete tickets by ID
+  const deleteTicket = (ticket) => {
+    console.log(ticket._id);
+    axios
+      .delete(`/api/tickets/${ticket._id}`)
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e));
+    setDeleted(deleted.slice());
+  };
+
   //Limited the number of tickets that display on DOM
   const limitView = (e) => {
     if (e.target.value === "All") return setAllTickets(originalTickets);
@@ -97,7 +100,7 @@ export default function SearchArea() {
     setAllTickets(limitTickets);
   };
 
-  //Display the next ticket
+  //Display the next tickets
   const nextPage = () => {
     let bool = false;
     const limitTickets = [];
@@ -150,7 +153,7 @@ export default function SearchArea() {
     setHideTickets([]);
   };
 
-  //Click on specific label it's render the ticket that have that label
+  //Clicks on specific label render the tickets that have that label
   const filteringByLabel = (e) => {
     const inputLabel = e.target.innerText;
 
@@ -168,8 +171,14 @@ export default function SearchArea() {
     }
   };
 
+  const displayFormToDom = () => {
+    setDisplayForm("display");
+    setBlur("display-blur");
+  };
+
   return (
     <div className="main">
+      <span className={saveTicketClass}>{saveTicket}</span>
       <input
         className="search-input"
         id="searchInput"
@@ -238,9 +247,21 @@ export default function SearchArea() {
           </div>
         )}
       </div>
+      {displayForm && (
+        <PostTicket
+          setDisplayForm={setDisplayForm}
+          setBlur={setBlur}
+          setDeleted={setDeleted}
+          deleted={deleted}
+          setSaveTicket={setSaveTicket}
+          setSaveTicketClass={setSaveTicketClass}
+        />
+      )}
       <div className={blur}>
         <p className="notFoundMessage">{notFoundMessage}</p>
-        <PostTicket />
+        <button className="open-form" onClick={displayFormToDom}>
+          +
+        </button>
         <TicketsList
           allTickets={allTickets}
           setCounterHiddenTickets={setCounterHiddenTickets}

@@ -1,38 +1,89 @@
+import axios from "axios";
 import React from "react";
+import "../styles/PostTicket.css";
 
-export default function PostTicket() {
+export default function PostTicket({
+  setDisplayForm,
+  setBlur,
+  setDeleted,
+  deleted,
+  setSaveTicket,
+  setSaveTicketClass,
+}) {
+  const hideFormFromDom = () => {
+    setDisplayForm();
+    setBlur("blur");
+  };
+  const sendAndReset = async (e) => {
+    e.preventDefault();
+    const form = new FormData(e.target);
+    const sendData = {};
+    for (let [key, value] of form) {
+      if (key === "labels") {
+        sendData[key] = sendData[key] ? sendData[key].concat(value) : [value];
+      } else {
+        sendData[key] = value;
+      }
+    }
+    axios
+      .post("/api/tickets/new", sendData)
+      .then(() => {
+        setDeleted(deleted.slice());
+        hideFormFromDom();
+        setSaveTicket("Ticket Save And Update!");
+        setSaveTicketClass("saved-ticket");
+        setTimeout(() => {
+          setSaveTicket();
+          setSaveTicketClass();
+        }, 4000);
+      })
+      .catch((e) => {
+        console.log(e);
+        hideFormFromDom();
+        setSaveTicket("Failed Save!");
+        setSaveTicketClass("saved-ticket");
+        setTimeout(() => {
+          setSaveTicket();
+          setSaveTicketClass();
+        }, 4000);
+      });
+  };
   return (
-    <form action="/api/tickets/new" method="post" target="hidden_iframe">
-      <label className="title-form">
-        Title
-        <input className="title-input" name="title"></input>
-      </label>
-      <label className="content-form">
-        Content
-        <input className="content-input" name="content"></input>
-      </label>
-      <label className="userEmail-form">
-        User Email
-        <input
-          className="userEmail-input"
-          type="string"
-          name="userEmail"
-        ></input>
-      </label>
-      <label className="creationTime-form">
-        Creation Time
-        <input
-          className="creationTime-input"
-          type="date"
-          name="creationTime"
-        ></input>
-      </label>
-      <div>
-        <label className="labels-form">
+    <form className="form" onSubmit={sendAndReset}>
+      <span className="exit" onClick={hideFormFromDom}>
+        ✖
+      </span>
+      <p className="p-form">NEW TICKET</p>
+      <div className="firs-line-form">
+        <label className="title-form" className="form-input">
+          Ticket Title
+          <input className="title-input" name="title" required></input>
+        </label>
+        <label className="userEmail-form" className="form-input">
+          User Email
+          <input
+            className="userEmail-input"
+            type="string"
+            name="userEmail"
+            required
+          ></input>
+        </label>
+        <label className="creationTime-form" className="form-input">
+          Creation Time <br />
+          <input
+            className="creationTime-input"
+            type="date"
+            name="creationTime"
+            required
+          ></input>
+        </label>
+      </div>
+      <div className="labels-form">
+        <label className="help-label-form">
           Help
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="help"
             className="help-label-form"
           ></input>
@@ -41,7 +92,7 @@ export default function PostTicket() {
           Tech
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="tech"
             className="tech-label-form"
           ></input>
@@ -50,7 +101,7 @@ export default function PostTicket() {
           Guidelines
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="guidelines"
             className="guidelines-label-form"
           ></input>
@@ -59,7 +110,7 @@ export default function PostTicket() {
           Corvid
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="corvid"
             className="corvid-label-form"
           ></input>
@@ -68,7 +119,7 @@ export default function PostTicket() {
           Api
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="api"
             className="api-label-form"
           ></input>
@@ -77,7 +128,7 @@ export default function PostTicket() {
           Collapse
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="collapse"
             className="collapse-label-form"
           ></input>
@@ -86,7 +137,7 @@ export default function PostTicket() {
           Expand
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="expand"
             className="expand-label-form"
           ></input>
@@ -95,7 +146,7 @@ export default function PostTicket() {
           Problem
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="problem"
             className="problem-label-form"
           ></input>
@@ -104,7 +155,7 @@ export default function PostTicket() {
           Login
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="login"
             className="login-label-form"
           ></input>
@@ -113,7 +164,7 @@ export default function PostTicket() {
           Tutorial
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="tutorial"
             className="tutorial-label-form"
           ></input>
@@ -122,15 +173,22 @@ export default function PostTicket() {
           View Count
           <input
             type="checkbox"
-            name="labels[]"
+            name="labels"
             value="view count"
             className="view-count-label-form"
           ></input>
         </label>
       </div>
-      <button className="add-btn" type="submit">
-        ADD
-      </button>
+      <label id="content-form" className="form-input">
+        Content
+        <br />
+        <input className="content-input" name="content" required></input>
+      </label>
+      <span onClick={() => setDeleted(deleted.slice())}>
+        <button className="add-btn" type="submit">
+          ADD
+        </button>
+      </span>
     </form>
   );
 }

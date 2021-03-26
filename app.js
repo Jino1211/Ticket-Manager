@@ -77,7 +77,7 @@ app.post("/api/tickets/new", async (req, res) => {
     });
 
     const doc = await newTicket.save();
-    return res.status(200).json(newTicket);
+    return res.status(200).json(doc);
   } catch (e) {
     console.log(e);
     res.status(500).json({ ERROR: "HAHHA" });

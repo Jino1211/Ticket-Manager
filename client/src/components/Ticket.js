@@ -92,7 +92,7 @@ export default function Ticket({
       <div className="date">
         <span className="user-email">
           {" "}
-          <a href="#">{ticket.userEmail}</a>{" "}
+          <a href={`mailto: ${ticket.userEmail} `}>{ticket.userEmail}</a>{" "}
         </span>
         |{" "}
         <span className="span-date">

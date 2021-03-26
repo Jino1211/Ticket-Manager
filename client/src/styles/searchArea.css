@@ -12,6 +12,20 @@ h1 {
 button {
   cursor: pointer;
 }
+.saved-ticket {
+  font-family: var(--letters-font);
+  /* display: flex; */
+  position: absolute;
+  /* justify-content: center; */
+  right: 46%;
+  top: 9%;
+  color: rebeccapurple;
+  -webkit-transition: opacity 5s ease-in-out;
+  -moz-transition: opacity 35s ease-in-out;
+  -ms-transition: opacity 5s ease-in-out;
+  -o-transition: opacity 5s ease-in-out;
+  opacity: 0;
+}
 .label-menu {
   display: inline-block;
   margin: 1%;
@@ -159,4 +173,11 @@ button {
 }
 .display-blur {
   filter: blur(8px);
+}
+.open-form {
+  box-shadow: gray 2px 3px 3px;
+  color: rgb(169, 218, 165);
+  background-color: rgb(83, 55, 3);
+  border: 4px inset rgb(118, 118, 118);
+  border-style: outset;
 }
